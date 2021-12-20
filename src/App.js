@@ -1,58 +1,65 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import Home from "./components/Home/Home";
+import Collection from "./components/Collection/Collection";
+import Signup from "./components/Signup_Login/Signup";
+import Login from "./components/Signup_Login/Login";
+import Navbar from "./components/Home/Navbar";
+import { checkLoggedIn } from "./redux/actions/authActions";
+import { connect } from "react-redux";
+import "./App.css";
+import BrowseGames from "./components/BrowseGames/BrowseGames";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    loading: true,
+  };
+
+  toggleLoading = () => {
+    this.setState({ loading: !this.state.loading });
+  };
+
+  componentDidMount() {
+    this.props.checkLoggedIn(this.toggleLoading);
+  }
+
+  render() {
+    if (this.state.loading) return <h1>Loading...</h1>;
+    return (
+      <div className="App">
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home}></Route>
+            <Route
+              path="/collection"
+              render={(props) => {
+                if (this.props.loggedIn) {
+                  return <Collection {...props} />;
+                } else {
+                  return <Redirect to="/login" />;
+                }
+              }}
+            ></Route>
+            <Route path="/signup" component={Signup}></Route>
+            <Route path="/login" component={Login}></Route>
+            <Route path="/browse" component={BrowseGames}></Route>
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.auth.loggedIn,
+  };
+};
+
+export default connect(mapStateToProps, { checkLoggedIn })(App);
