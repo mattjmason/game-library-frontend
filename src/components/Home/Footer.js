@@ -14,7 +14,7 @@ function Footer() {
           <div className="social-icons">
             <Link
               className="social-icon-link github"
-              to="//github.com/OrkunSA/"
+              to="//github.com/mattjmason/"
               target="_blank"
               aria-label="Github"
             >
@@ -22,7 +22,7 @@ function Footer() {
             </Link>
             <Link
               className="social-icon-link twitter"
-              to="//twitter.com/OrkunS9"
+              to="//twitter.com/mattjmason"
               target="_blank"
               aria-label="Twitter"
             >
@@ -30,7 +30,7 @@ function Footer() {
             </Link>
             <Link
               className="social-icon-link twitter"
-              to="//www.linkedin.com/in/orkun-saglam-82bab515/"
+              to="//www.linkedin.com/in/mattjmason/"
               target="_blank"
               aria-label="LinkedIn"
             >

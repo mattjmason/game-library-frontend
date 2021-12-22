@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Hero() {
   return (
     <div className="hero-container">
-      <video src="/videos/neonartvisual.mp4" autoPlay loop muted />
+      {/* <video src="/videos/neonartvisual.mp4" autoPlay loop muted /> */}
       <h1>IT'S GAME TIME</h1>
       <p>Get Ready!</p>
       <div className="hero-btns">
