@@ -23,7 +23,7 @@ class SearchContainer extends React.Component {
       let search = this.state.text;
       const API_KEY = process.env.REACT_APP_API_KEY;
       const SEARCH_URL = `https://api.rawg.io/api/games?search=${search}&key=`;
-      fetch(SEARCH_URL + search + API_KEY)
+      fetch(SEARCH_URL + API_KEY)
         .then((resp) => resp.json())
         .then((games) => {
           this.props.gameSearchResults(games.results);
