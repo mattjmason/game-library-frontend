@@ -14,7 +14,7 @@ class Collection extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3001/user/collections`, {
+    fetch(`http://localhost:3001/user/collection/`, {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -24,7 +24,7 @@ class Collection extends React.Component {
   }
 
   deleteFromCollection = (id) => {
-    fetch(`http://localhost:3001/user/collections/${id}`, {
+    fetch(`http://localhost:3001/user/collection/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
